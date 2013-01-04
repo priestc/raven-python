@@ -11,6 +11,10 @@ __all__ = ('register', 'transform')
 
 logger = logging.getLogger('sentry.errors.serializer')
 
+try:
+    unicode
+except NameError:
+    unicode = str
 
 class SerializationManager(object):
     logger = logger

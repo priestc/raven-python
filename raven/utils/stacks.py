@@ -15,6 +15,10 @@ from raven.utils.serializer import transform
 
 _coding_re = re.compile(r'coding[:=]\s*([-\w.]+)')
 
+try:
+    unicode
+except NameError:
+    unicode = lambda x, y, z: str(x)
 
 def get_lines_from_file(filename, lineno, context_lines, loader=None, module_name=None):
     """

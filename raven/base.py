@@ -38,6 +38,7 @@ PLATFORM_NAME = 'python'
 try:
     unicode
 except NameError:
+    #python 3
     unicode = str
 
 class ModuleProxyCache(dict):
@@ -45,7 +46,7 @@ class ModuleProxyCache(dict):
         module, class_name = key.rsplit('.', 1)
 
         handler = getattr(__import__(module, {},
-                {}, [class_name], -1), class_name)
+                {}, [class_name], 0), class_name)
 
         self[key] = handler
 
@@ -234,7 +235,7 @@ class Client(object):
         if data.get('culprit'):
             culprit = data['culprit']
 
-        for k, v in result.iteritems():
+        for k, v in result.items():
             if k not in data:
                 data[k] = v
 
@@ -281,10 +282,10 @@ class Client(object):
 
         # Add extra context
         if self.extra:
-            for k, v in self.extra.iteritems():
+            for k, v in self.extra.items():
                 data['extra'].setdefault(k, v)
 
-        for k, v in extra.iteritems():
+        for k, v in extra.items():
             data['extra'][k] = v
 
         if culprit:

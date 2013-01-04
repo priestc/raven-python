@@ -8,6 +8,10 @@ raven.utils.encoding
 
 import warnings
 
+try:
+    basestring
+except NameError:
+    basestring = (str, bytes)
 
 def force_unicode(s, encoding='utf-8', errors='strict'):
     """

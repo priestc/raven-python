@@ -10,6 +10,11 @@ import re
 
 from raven.utils import varmap
 
+try:
+    basestring
+except NameError:
+    #python 3
+    basestring = (str, bytes)
 
 class Processor(object):
     def __init__(self, client):
