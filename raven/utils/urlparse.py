@@ -1,5 +1,5 @@
 from __future__ import absolute_import
-import urlparse as _urlparse
+import urllib.parse as _urlparse
 
 
 def register_scheme(scheme):
