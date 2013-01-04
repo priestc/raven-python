@@ -8,7 +8,7 @@ raven.transport.builtins
 
 import logging
 import sys
-import urllib2
+import urllib
 
 try:
     # Google App Engine blacklists parts of the socket module, this will prevent
@@ -283,7 +283,7 @@ class EventletHTTPTransport(HTTPTransport):
                 response = eventlet_urllib2.urlopen(req, payload[0],
                                                     self.timeout).read()
             return response
-        except Exception, err:
+        except Exception as err:
             return err
 
     def send(self, data, headers):

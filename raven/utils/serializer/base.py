@@ -9,11 +9,17 @@ raven.utils.serializer.base
 import itertools
 from raven.utils.encoding import to_string, to_unicode
 from raven.utils.serializer.manager import register
-from types import ClassType, TypeType
 from uuid import UUID
 
 __all__ = ('Serializer',)
 
+
+try:
+    unicode
+except NameError:
+    # python 3
+    unicode = str
+    long = int
 
 def has_sentry_metadata(value):
     try:
@@ -99,7 +105,7 @@ class StringSerializer(Serializer):
 
 
 class TypeSerializer(Serializer):
-    types = (ClassType, TypeType,)
+    types = (type, )
 
     def can(self, value):
         return not super(TypeSerializer, self).can(value) and has_sentry_metadata(value)

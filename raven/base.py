@@ -35,6 +35,11 @@ __all__ = ('Client',)
 PLATFORM_NAME = 'python'
 
 
+try:
+    unicode
+except NameError:
+    unicode = str
+
 class ModuleProxyCache(dict):
     def __missing__(self, key):
         module, class_name = key.rsplit('.', 1)
